@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6316A4E29AA632A00DB3372 /* MostPopularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6316A4D29AA632A00DB3372 /* MostPopularView.swift */; };
+		E6316A5829AA8AB800DB3372 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6316A5729AA8AB800DB3372 /* Carousel.swift */; };
 		E6650CED29AA074700631F2F /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6650CEC29AA074700631F2F /* CustomSearchBar.swift */; };
 		E6650CF229AA200A00631F2F /* BeVietnamPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6650CF129AA200A00631F2F /* BeVietnamPro-Regular.ttf */; };
 		E6650CF529AA264D00631F2F /* BeVietnamPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6650CF429AA264D00631F2F /* BeVietnamPro-Bold.ttf */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6316A4D29AA632A00DB3372 /* MostPopularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostPopularView.swift; sourceTree = "<group>"; };
+		E6316A5729AA8AB800DB3372 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		E6650CEC29AA074700631F2F /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		E6650CF029AA1FD200631F2F /* BeVietnamPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnamPro-Black.ttf"; sourceTree = "<group>"; };
 		E6650CF129AA200A00631F2F /* BeVietnamPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnamPro-Regular.ttf"; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				E67A8B2029A88EAD002C8981 /* Assets.xcassets */,
 				E67A8B2229A88EAD002C8981 /* Preview Content */,
 				E6650CEC29AA074700631F2F /* CustomSearchBar.swift */,
+				E6316A4D29AA632A00DB3372 /* MostPopularView.swift */,
+				E6316A5729AA8AB800DB3372 /* Carousel.swift */,
 			);
 			path = movieapp;
 			sourceTree = "<group>";
@@ -281,7 +287,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E67A8B1F29A88EAC002C8981 /* ContentView.swift in Sources */,
+				E6316A4E29AA632A00DB3372 /* MostPopularView.swift in Sources */,
 				E67A8B1D29A88EAC002C8981 /* movieappApp.swift in Sources */,
+				E6316A5829AA8AB800DB3372 /* Carousel.swift in Sources */,
 				E6650CED29AA074700631F2F /* CustomSearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

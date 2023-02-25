@@ -34,7 +34,7 @@ struct ContentView: View {
                     .padding(.horizontal, 63)
 
                 CustomSearchBar()
-
+                MostPopularView()
             }
                 .frame(maxWidth: .infinity,
                 maxHeight: .infinity,
