@@ -9,64 +9,46 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State var searchController: String = ""
     var body: some View {
         ZStack {
-            VStack() {
+            VStack(spacing: 0) {
                 HStack(spacing: 0) {
                     SwiftUI.Group {
                         Text("Hello,")
                             .foregroundColor(Color.white)
-                            .font(.system(size: 18))
-                        
+                            .font(.custom("BeVietnamPro-Black", fixedSize: 18))
+
                         Text(" Jane!")
-                            .fontWeight(.bold)
+                            .fontWeight(.black)
                             .foregroundColor(Color.white)
-                            .font(.system(size: 18))
+                            .font(
+                                .custom("BeVietnamPro-Bold", fixedSize: 18)
+                        )
                     }
                     Spacer()
                     Image("ic_notification")
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 63)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 63)
 
-                HStack(spacing: 0) {
-                    TextField("Search", text: $searchController)
-//                        .modifier(PlaceholderStyle(showPlaceHolder: true, placeholder: "Search"))
-                        .padding(.vertical, 14)
-                        .background(
-                            LinearGradient(
-                                gradient: Gradient(
-                                    colors: [
-                                        Color(red: 0.42, green: 0.4, blue: 0.651),
-                                        Color(red: 0.459, green: 0.82, blue: 0.867)
-                                    ]
-                                ),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-//                        .opacity(0.3)
-                        .cornerRadius(15)
-                        .foregroundColor(Color.white)
-                }
-                .padding(.horizontal, 50)
+                CustomSearchBar()
+
             }
-            .frame(maxWidth: .infinity,
-                   maxHeight: .infinity,
-                   alignment: .top
+                .frame(maxWidth: .infinity,
+                maxHeight: .infinity,
+                alignment: .top
             )
         }.background(
             LinearGradient(
                 gradient:
                     Gradient(
-                        colors: [
-                            Color("gradientColorStart"),
-                            Color("gradientColorEnd")
-                        ]
-                    ),
+                    colors: [
+                        Color("gradientColorStart"),
+                        Color("gradientColorEnd")
+                    ]
+                ),
                 startPoint: .leading,
                 endPoint: .trailing
             )
@@ -88,12 +70,12 @@ public struct PlaceholderStyle: ViewModifier {
         ZStack(alignment: .leading) {
             if showPlaceHolder {
                 Text(placeholder)
-                .padding(.horizontal, 15)
-                .foregroundColor(Color.white)
+                    .padding(.horizontal, 15)
+                    .foregroundColor(Color.white)
             }
             content
-            .foregroundColor(Color.white)
-            .padding(5.0)
+                .foregroundColor(Color.white)
+                .padding(5.0)
         }
     }
 }
@@ -101,8 +83,8 @@ public struct PlaceholderStyle: ViewModifier {
 struct CustomTextField: View {
     var placeholder: Text
     @Binding var text: String
-    var editingChanged: (Bool)->() = { _ in }
-    var commit: ()->() = { }
+    var editingChanged: (Bool) -> () = { _ in }
+    var commit: () -> () = { }
 
     var body: some View {
         ZStack(alignment: .leading) {

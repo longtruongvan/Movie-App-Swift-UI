@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6650CED29AA074700631F2F /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6650CEC29AA074700631F2F /* CustomSearchBar.swift */; };
+		E6650CF229AA200A00631F2F /* BeVietnamPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6650CF129AA200A00631F2F /* BeVietnamPro-Regular.ttf */; };
+		E6650CF529AA264D00631F2F /* BeVietnamPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6650CF429AA264D00631F2F /* BeVietnamPro-Bold.ttf */; };
 		E67A8B1D29A88EAC002C8981 /* movieappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67A8B1C29A88EAC002C8981 /* movieappApp.swift */; };
 		E67A8B1F29A88EAC002C8981 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67A8B1E29A88EAC002C8981 /* ContentView.swift */; };
 		E67A8B2129A88EAD002C8981 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E67A8B2029A88EAD002C8981 /* Assets.xcassets */; };
@@ -34,6 +37,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6650CEC29AA074700631F2F /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
+		E6650CF029AA1FD200631F2F /* BeVietnamPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnamPro-Black.ttf"; sourceTree = "<group>"; };
+		E6650CF129AA200A00631F2F /* BeVietnamPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnamPro-Regular.ttf"; sourceTree = "<group>"; };
+		E6650CF329AA21C300631F2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E6650CF429AA264D00631F2F /* BeVietnamPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnamPro-Bold.ttf"; sourceTree = "<group>"; };
 		E67A8B1929A88EAC002C8981 /* movieapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movieapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E67A8B1C29A88EAC002C8981 /* movieappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = movieappApp.swift; sourceTree = "<group>"; };
 		E67A8B1E29A88EAC002C8981 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +79,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E6650CEE29AA1D8300631F2F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E6650CF429AA264D00631F2F /* BeVietnamPro-Bold.ttf */,
+				E6650CF129AA200A00631F2F /* BeVietnamPro-Regular.ttf */,
+				E6650CF029AA1FD200631F2F /* BeVietnamPro-Black.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		E67A8B1029A88EAC002C8981 = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +112,13 @@
 		E67A8B1B29A88EAC002C8981 /* movieapp */ = {
 			isa = PBXGroup;
 			children = (
+				E6650CF329AA21C300631F2F /* Info.plist */,
+				E6650CEE29AA1D8300631F2F /* Fonts */,
 				E67A8B1C29A88EAC002C8981 /* movieappApp.swift */,
 				E67A8B1E29A88EAC002C8981 /* ContentView.swift */,
 				E67A8B2029A88EAD002C8981 /* Assets.xcassets */,
 				E67A8B2229A88EAD002C8981 /* Preview Content */,
+				E6650CEC29AA074700631F2F /* CustomSearchBar.swift */,
 			);
 			path = movieapp;
 			sourceTree = "<group>";
@@ -232,7 +253,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E67A8B2429A88EAD002C8981 /* Preview Assets.xcassets in Resources */,
+				E6650CF229AA200A00631F2F /* BeVietnamPro-Regular.ttf in Resources */,
 				E67A8B2129A88EAD002C8981 /* Assets.xcassets in Resources */,
+				E6650CF529AA264D00631F2F /* BeVietnamPro-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +282,7 @@
 			files = (
 				E67A8B1F29A88EAC002C8981 /* ContentView.swift in Sources */,
 				E67A8B1D29A88EAC002C8981 /* movieappApp.swift in Sources */,
+				E6650CED29AA074700631F2F /* CustomSearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +445,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"movieapp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = movieapp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -449,6 +474,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"movieapp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = movieapp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
