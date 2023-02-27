@@ -58,7 +58,7 @@ struct MostPopularView: View {
                                 .padding(.trailing, 26)
                         }
                             .frame(width: 328, height: 141, alignment: .bottomLeading)
-                        
+
                         Text("")
                             .frame(width: 328, height: 141)
                             .background(
@@ -154,7 +154,7 @@ struct MostPopularView: View {
                                 .padding(.trailing, 26)
                         }
                             .frame(width: 328, height: 141, alignment: .bottomLeading)
-                        
+
                         Text("")
                             .frame(width: 328, height: 141)
                             .background(
@@ -175,8 +175,8 @@ struct MostPopularView: View {
 
                 }
 
-            }.frame(height: 141).padding(.bottom,17)
-            
+            }.frame(height: 141).padding(.bottom, 17)
+
             CustomPageIndicator(numberOfPages: 3, currentIndex: 1)
         }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -187,11 +187,8 @@ struct MostPopularView: View {
 struct CustomPageIndicator: View {
     let numberOfPages: Int
     let currentIndex: Int
-    private let circleSize: CGFloat = 16
-    private let circleSpacing: CGFloat = 12
-
-    private let primaryColor = Color.white
-    private let secondaryColor = Color.white.opacity(0.6)
+    private let circleSize: CGFloat = 8
+    private let circleSpacing: CGFloat = 5
 
     private let smallScale: CGFloat = 0.6
 
@@ -199,15 +196,24 @@ struct CustomPageIndicator: View {
         HStack(spacing: circleSpacing) {
             ForEach(0..<numberOfPages) { index in // 1
                 if shouldShowIndex(index) {
-                    Circle()
-                        .fill(currentIndex == index ? primaryColor : secondaryColor) // 2
-                    .scaleEffect(currentIndex == index ? 1 : smallScale)
-
+                    HStack {
+                        Text("")
+                    }
                         .frame(width: circleSize, height: circleSize)
+                        .cornerRadius(circleSize / 2)
+                        .background(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.392, green: 0.671, blue: 0.859),
+                                Color(red: 0.51, green: 0.431, blue: 0.784)
+                            ],
+                            startPoint: .leading,
+                            endPoint: .top
+                        ).opacity(currentIndex == index ? 1 : 0.3))
+                        .transition(AnyTransition.opacity.combined(with: .scale))
+                        .id(index)
+                        .cornerRadius(circleSize / 2)
 
-                        .transition(AnyTransition.opacity.combined(with: .scale)) // 3
-
-                        .id(index) // 4
                 }
             }
         }
