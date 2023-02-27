@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MostPopularView: View {
-    @State private var currentIndex = 0
+    @State private var currentIndex: Int = 0
 
+    private var carouselConfig = CarouselConfig()
     var body: some View {
         VStack(spacing: 0) {
             Text("Most Popular")
@@ -20,7 +21,11 @@ struct MostPopularView: View {
                 .padding(.top, 26)
                 .padding(.leading, 50)
 
-            Carousel(cardWidth: 328, spacing: -14) {
+            Carousel(cardWidth: 328, spacing: -14, carouselConfig: CarouselConfig(), pageSelectedCallback: { result in
+                    print(result)
+                currentIndex = result
+                print("LONGTV: \(currentIndex)")
+                }) {
                 CarouselCard {
                     ZStack {
                         Image("fantasticFour")
@@ -177,7 +182,7 @@ struct MostPopularView: View {
 
             }.frame(height: 141).padding(.bottom, 17)
 
-            CustomPageIndicator(numberOfPages: 3, currentIndex: 1)
+            CustomPageIndicator(numberOfPages: 3, currentIndex: $currentIndex)
         }
             .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -186,7 +191,7 @@ struct MostPopularView: View {
 
 struct CustomPageIndicator: View {
     let numberOfPages: Int
-    let currentIndex: Int
+    @Binding var currentIndex: Int
     private let circleSize: CGFloat = 8
     private let circleSpacing: CGFloat = 5
 
@@ -195,32 +200,25 @@ struct CustomPageIndicator: View {
     var body: some View {
         HStack(spacing: circleSpacing) {
             ForEach(0..<numberOfPages) { index in // 1
-                if shouldShowIndex(index) {
-                    HStack {
-                        Text("")
-                    }
-                        .frame(width: circleSize, height: circleSize)
-                        .cornerRadius(circleSize / 2)
-                        .background(
-                        LinearGradient(
-                            colors: [
-                                Color(red: 0.392, green: 0.671, blue: 0.859),
-                                Color(red: 0.51, green: 0.431, blue: 0.784)
-                            ],
-                            startPoint: .leading,
-                            endPoint: .top
-                        ).opacity(currentIndex == index ? 1 : 0.3))
-                        .transition(AnyTransition.opacity.combined(with: .scale))
-                        .id(index)
-                        .cornerRadius(circleSize / 2)
-
+                HStack {
+                    Text("")
                 }
+                    .frame(width: circleSize, height: circleSize)
+                    .cornerRadius(circleSize / 2)
+                    .background(
+                    LinearGradient(
+                        colors: [
+                            Color(red: 0.392, green: 0.671, blue: 0.859),
+                            Color(red: 0.51, green: 0.431, blue: 0.784)
+                        ],
+                        startPoint: .leading,
+                        endPoint: .top
+                    ).opacity(currentIndex == index ? 1 : 0.3))
+                    .transition(AnyTransition.opacity.combined(with: .scale))
+                    .id(index)
+                    .cornerRadius(circleSize / 2)
             }
         }
-    }
-
-    func shouldShowIndex(_ index: Int) -> Bool {
-        ((currentIndex - 1)...(currentIndex + 1)).contains(index)
     }
 }
 

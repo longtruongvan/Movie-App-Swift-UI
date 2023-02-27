@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-fileprivate class CarouselConfig: ObservableObject {
+class CarouselConfig: ObservableObject {
     @Published var cardWidth: CGFloat = 0
     @Published var cardCount: Int = 0
     @Published var selected: Int = 0
@@ -24,18 +24,25 @@ struct Carousel<Cards: View>: View {
     @State private var gestureOffset: CGFloat = 0
 
     private let spacing: CGFloat
-
+    private let carouselConfig: CarouselConfig
+    private let pageSelectedCallback: (Int) -> ()
     init(
-        cardWidth: CGFloat, selected: Int = 0, spacing: CGFloat = 20,
+        cardWidth: CGFloat,
+        selected: Int = 0,
+        spacing: CGFloat = 20,
+        carouselConfig: CarouselConfig,
+        pageSelectedCallback: @escaping (Int) -> (),
         @ViewBuilder cards: @escaping () -> Cards
     ) {
-        self.config = CarouselConfig()
+        self.config = carouselConfig
         self.config.cardWidth = cardWidth
         self.config.selected = selected
 
         self.spacing = spacing
 
         self.cards = cards()
+        self.carouselConfig = carouselConfig
+        self.pageSelectedCallback = pageSelectedCallback
     }
 
     func offset(for index: Int, geometry: GeometryProxy) -> CGFloat {
@@ -67,7 +74,8 @@ struct Carousel<Cards: View>: View {
                         self.config.selected = max(0, self.config.selected - 1)
                     }
                     withAnimation(.easeOut(duration: 0.3)) {
-                        print(self.config.selected)
+                        print("ZZZZZ: \(self.config.selected)")
+                        pageSelectedCallback(self.config.selected)
                         self.offset = self.offset(for: self.config.selected, geometry: geometry)
                     }
                 })
@@ -105,8 +113,28 @@ struct CarouselCard<Content: View>: View {
 }
 
 struct Carousel_Previews: PreviewProvider {
+
+    static func testOfClosures (flag: Int, closure1: () -> (), closure2: () -> (), closure3: () -> ())
+    {
+        switch flag
+        {
+        case 1:
+            closure1()
+        case 2:
+            closure2()
+        default:
+            closure3()
+        }
+    }
+
+    static func test() {
+        testOfClosures(flag: 1, closure1: { }, closure2: { }, closure3: { })
+    }
+
     static var previews: some View {
-        Carousel(cardWidth: 200, spacing: 10) {
+        Carousel(cardWidth: 200, carouselConfig: CarouselConfig(), pageSelectedCallback: { result in
+                print(result)
+        }){
             CarouselCard {
                 Text("First Card")
                     .frame(width: 200, height: 200)
@@ -128,5 +156,6 @@ struct Carousel_Previews: PreviewProvider {
                     .background(Color.green)
             }
         }
+
     }
 }
