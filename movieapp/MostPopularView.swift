@@ -31,6 +31,34 @@ struct MostPopularView: View {
 
                         Image("img_mark_movie")
 
+                        HStack {
+                            Text("Deadpool 2")
+                                .font(.custom("BeVietnamPro-Bold", size: 18))
+                                .foregroundColor(.white)
+                                .padding(.bottom, 15)
+                                .padding(.leading, 26)
+
+                            Spacer()
+
+                            HStack (alignment: .center) {
+                                Text("IMDb")
+                                    .font(.custom("BeVietnamPro-Bold", size: 10))
+                                    .foregroundColor(.black)
+
+
+                                Text("8.5")
+                                    .font(.custom("BeVietnamPro-Bold", size: 10))
+                                    .foregroundColor(.black)
+                            }
+                                .padding(.horizontal, 5.25)
+                                .padding(.vertical, 3)
+                                .background(Color.yellow)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .padding(.bottom, 15)
+                                .padding(.trailing, 26)
+                        }
+                            .frame(width: 328, height: 141, alignment: .bottomLeading)
+                        
                         Text("")
                             .frame(width: 328, height: 141)
                             .background(
@@ -59,6 +87,34 @@ struct MostPopularView: View {
 
 
                         Image("img_mark_movie")
+
+                        HStack {
+                            Text("Deadpool 2")
+                                .font(.custom("BeVietnamPro-Bold", size: 18))
+                                .foregroundColor(.white)
+                                .padding(.bottom, 15)
+                                .padding(.leading, 26)
+
+                            Spacer()
+
+                            HStack (alignment: .center) {
+                                Text("IMDb")
+                                    .font(.custom("BeVietnamPro-Bold", size: 10))
+                                    .foregroundColor(.black)
+
+
+                                Text("8.5")
+                                    .font(.custom("BeVietnamPro-Bold", size: 10))
+                                    .foregroundColor(.black)
+                            }
+                                .padding(.horizontal, 5.25)
+                                .padding(.vertical, 3)
+                                .background(Color.yellow)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .padding(.bottom, 15)
+                                .padding(.trailing, 26)
+                        }
+                            .frame(width: 328, height: 141, alignment: .bottomLeading)
                     }.frame(width: 328, height: 141)
                 }
                 CarouselCard {
@@ -71,6 +127,34 @@ struct MostPopularView: View {
 
                         Image("img_mark_movie")
 
+                        HStack {
+                            Text("Deadpool 2")
+                                .font(.custom("BeVietnamPro-Bold", size: 18))
+                                .foregroundColor(.white)
+                                .padding(.bottom, 15)
+                                .padding(.leading, 26)
+
+                            Spacer()
+
+                            HStack (alignment: .center) {
+                                Text("IMDb")
+                                    .font(.custom("BeVietnamPro-Bold", size: 10))
+                                    .foregroundColor(.black)
+
+
+                                Text("8.5")
+                                    .font(.custom("BeVietnamPro-Bold", size: 10))
+                                    .foregroundColor(.black)
+                            }
+                                .padding(.horizontal, 5.25)
+                                .padding(.vertical, 3)
+                                .background(Color.yellow)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .padding(.bottom, 15)
+                                .padding(.trailing, 26)
+                        }
+                            .frame(width: 328, height: 141, alignment: .bottomLeading)
+                        
                         Text("")
                             .frame(width: 328, height: 141)
                             .background(
@@ -91,7 +175,9 @@ struct MostPopularView: View {
 
                 }
 
-            }
+            }.frame(height: 141).padding(.bottom,17)
+            
+            CustomPageIndicator(numberOfPages: 3, currentIndex: 1)
         }
             .frame(maxWidth: .infinity, alignment: .leading)
 
