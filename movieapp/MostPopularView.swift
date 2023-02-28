@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MostPopularView: View {
     @State private var currentIndex: Int = 0
+    @State private var mostPopularResponse: MostPopularResponse?;
 
     private var carouselConfig = CarouselConfig()
     var body: some View {
@@ -21,11 +22,24 @@ struct MostPopularView: View {
                 .padding(.top, 26)
                 .padding(.leading, 50)
 
+            List(mostPopularResponse?.results ?? [Result]()) { _ in
+                Text("LONGTV")
+                    .font(.title)
+                    .foregroundColor(.red)
+                    .padding(.bottom)
+            }.onAppear() {
+                MostPopularRepository().loadData(completion: { data in
+                    self.mostPopularResponse = data
+                })
+            }.navigationTitle("Book List")
+            
             Carousel(cardWidth: 328, spacing: -14, carouselConfig: CarouselConfig(), pageSelectedCallback: { result in
                     print(result)
-                currentIndex = result
-                print("LONGTV: \(currentIndex)")
+                    currentIndex = result
+                    print("LONGTV: \(currentIndex)")
                 }) {
+            
+
                 CarouselCard {
                     ZStack {
                         Image("fantasticFour")
