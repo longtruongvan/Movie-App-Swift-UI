@@ -39,14 +39,15 @@ struct UpcomingReleaseView: View {
                         movieType: MovieType.upComingRelease
                     ) {
                         ZStack {
-                            AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
+                            AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.posterPath)) { image in
                                 MovieArtView(
                                     indexOfCarousel:$indexOfCarousel,
                                     mostPopulars:$mostPopular,
                                     item:item,
                                     image: image,
                                     width: 145,
-                                    height: 214.71
+                                    height: 214.71,
+                                    movieType: MovieType.upComingRelease
                                 )
 
                             } placeholder: {
@@ -56,11 +57,13 @@ struct UpcomingReleaseView: View {
                             }
                                 .ignoresSafeArea()
 
-//                            BackGoundGradientItemView(
-//                                indexOfCarousel: $indexOfCarousel,
-//                                mostPopulars: $mostPopular,
-//                                item: item
-//                            )
+                            BackGoundGradientItemView(
+                                indexOfCarousel: $indexOfCarousel,
+                                mostPopulars: $mostPopular,
+                                item: item,
+                                width: 145,
+                                height: 214.71
+                            )
 
                         }.frame(width: 145, height: 214.71)
 
@@ -76,7 +79,6 @@ struct UpcomingReleaseView: View {
                 } failure: { errorMessage in
                 }
             }.navigationTitle("Book List")
-
 
 
             CustomPageIndicator(

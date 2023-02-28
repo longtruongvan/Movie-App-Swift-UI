@@ -38,7 +38,13 @@ struct MostPopularView: View {
                     CarouselCard(movieType: MovieType.mostPopular) {
                         ZStack {
                             AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
-                                MovieArtView(indexOfCarousel: $indexOfCarousel, mostPopulars: $mostPopular, item: item, image: image)
+                                MovieArtView(
+                                    indexOfCarousel:$indexOfCarousel,
+                                    mostPopulars: $mostPopular,
+                                    item: item,
+                                    image: image,
+                                    movieType: MovieType.mostPopular
+                                )
 
                             } placeholder: {
                                 ProgressView()
@@ -117,10 +123,18 @@ struct BackGoundGradientItemView: View {
     @Binding var indexOfCarousel: Int
     @Binding var mostPopulars: MostPopulars?
     var item: MostPopularResponse
+    var width: Double = 328
+    var height: Double = 141
 
     var body: some View {
         Text("")
-            .frame(width: (checkItemIsSelected(mostPopulars: mostPopulars, index: indexOfCarousel, item: item)) ? 0 : 328, height: 141)
+            .frame(
+                width: (
+                    checkItemIsSelected(
+                        mostPopulars: mostPopulars,
+                        index: indexOfCarousel,
+                        item: item
+                    )) ? 0 : width, height: height)
             .background(
             LinearGradient(
                 gradient:
@@ -154,6 +168,7 @@ struct MovieArtView: View {
     var image: Image
     var width: Double = 328
     var height: Double = 141
+    var movieType: MovieType
 
     var body: some View {
         image
@@ -164,6 +179,9 @@ struct MovieArtView: View {
     }
 
     func checkItemIsSelected(mostPopulars: MostPopulars?, index: Int, item: MostPopularResponse) -> Bool {
+        if(movieType == MovieType.upComingRelease) {
+            return true
+        }
         if(mostPopulars == nil) {
             return false
         }
