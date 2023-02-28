@@ -11,7 +11,7 @@ import SwiftUI
 struct movieappApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().edgesIgnoringSafeArea(.all)
         }
     }
 }

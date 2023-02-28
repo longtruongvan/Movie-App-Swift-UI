@@ -12,6 +12,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                Spacer()
                 HStack(spacing: 0) {
                     SwiftUI.Group {
                         Text("Hello,")
@@ -37,6 +38,8 @@ struct ContentView: View {
                 MostPopularView()
                 HomeCategories()
                 UpcomingReleaseView()
+                Spacer()
+                BottomNavigationBar()
             }
                 .frame(maxWidth: .infinity,
                 maxHeight: .infinity,
@@ -55,6 +58,7 @@ struct ContentView: View {
                 endPoint: .trailing
             )
         )
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
 
