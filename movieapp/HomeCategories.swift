@@ -64,7 +64,7 @@ struct ItemCategory: View {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(
                 Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2)
-                ), lineWidth: 1
+                     ), lineWidth: 1.5
             ))
     }
 

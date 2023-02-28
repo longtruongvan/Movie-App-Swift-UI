@@ -23,16 +23,19 @@ struct MostPopularView: View {
                 .padding(.top, 26)
                 .padding(.leading, 50)
 
-
-
-            Carousel(cardWidth: 328, spacing: -14, carouselConfig: CarouselConfig(), pageSelectedCallback: { result in
+            Carousel(
+                movieType: MovieType.mostPopular,
+                cardWidth: 328,
+                spacing: -14,
+                carouselConfig: CarouselConfig(),
+                pageSelectedCallback: { result in
                     print(result)
                     indexOfCarousel = result
                     currentIndex = result % 3
                     print("LONGTV: \(currentIndex)")
                 }) {
                 ForEach(mostPopular?.results ?? [MostPopularResponse]()) { item in
-                    CarouselCard {
+                    CarouselCard(movieType: MovieType.mostPopular) {
                         ZStack {
                             AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
                                 MovieArtView(indexOfCarousel: $indexOfCarousel, mostPopulars: $mostPopular, item: item, image: image)
@@ -149,12 +152,14 @@ struct MovieArtView: View {
     @Binding var mostPopulars: MostPopulars?
     var item: MostPopularResponse
     var image: Image
+    var width: Double = 328
+    var height: Double = 141
 
     var body: some View {
         image
             .resizable()
             .scaledToFill()
-            .frame(width: 328, height: 141)
+            .frame(width: width, height: height)
             .opacity(checkItemIsSelected(mostPopulars: mostPopulars, index: indexOfCarousel, item: item) ? 1 : 0.5)
     }
 

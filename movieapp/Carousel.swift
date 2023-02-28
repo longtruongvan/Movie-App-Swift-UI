@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum MovieType {
+    case mostPopular
+    case upComingRelease
+}
+
 class CarouselConfig: ObservableObject {
     @Published var cardWidth: CGFloat = 0
     @Published var cardCount: Int = 0
@@ -17,6 +22,7 @@ struct Carousel<Cards: View>: View {
     let cards: Cards
 
     private var config: CarouselConfig
+    private var movieType: MovieType
 
     @GestureState private var isDetectingLongPress = false
 
@@ -27,6 +33,7 @@ struct Carousel<Cards: View>: View {
     private let carouselConfig: CarouselConfig
     private let pageSelectedCallback: (Int) -> ()
     init(
+        movieType: MovieType,
         cardWidth: CGFloat,
         selected: Int = 0,
         spacing: CGFloat = 20,
@@ -43,9 +50,14 @@ struct Carousel<Cards: View>: View {
         self.cards = cards()
         self.carouselConfig = carouselConfig
         self.pageSelectedCallback = pageSelectedCallback
+        self.movieType = movieType
     }
 
     func offset(for index: Int, geometry: GeometryProxy) -> CGFloat {
+        if(self.movieType == MovieType.upComingRelease){
+            return ( (geometry.size.width - self.config.cardWidth) / 2 - CGFloat(self.config.selected)
+                     * (self.config.cardWidth + spacing)) - self.config.cardWidth
+        }
         return (geometry.size.width - self.config.cardWidth) / 2 - CGFloat(self.config.selected)
             * (self.config.cardWidth + spacing)
     }
@@ -87,6 +99,7 @@ struct CarouselCard<Content: View>: View {
     @EnvironmentObject var config: CarouselConfig
 
     let content: Content
+    let movieType: MovieType
     @State private var cardId: Int? = nil
 
     var isActive: Bool {
@@ -94,15 +107,18 @@ struct CarouselCard<Content: View>: View {
         return cardId == config.cardCount - config.selected - 1
     }
 
-    init(@ViewBuilder content: @escaping () -> Content) {
+    init(
+        movieType: MovieType,
+        @ViewBuilder content: @escaping () -> Content) {
         self.content = content()
+        self.movieType = movieType
     }
 
     var body: some View {
         content
             .cornerRadius(30)
             .frame(width: config.cardWidth)
-            .scaleEffect(isActive ? 1 : 0.8)
+            .scaleEffect(isActive ? 1 : (movieType == MovieType.mostPopular) ? 0.8 : 1)
             .animation(.easeInOut, value: isActive)
             .zIndex(isActive ? 1 : 0)
             .onAppear {
@@ -132,28 +148,17 @@ struct Carousel_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        Carousel(cardWidth: 200, carouselConfig: CarouselConfig(), pageSelectedCallback: { result in
+        Carousel(
+            movieType: MovieType.mostPopular,
+            cardWidth: 200,
+            carouselConfig: CarouselConfig(),
+            pageSelectedCallback: { result in
                 print(result)
-        }){
-            CarouselCard {
+            }) {
+            CarouselCard (movieType: MovieType.mostPopular) {
                 Text("First Card")
                     .frame(width: 200, height: 200)
                     .background(Color.blue)
-            }
-            CarouselCard {
-                Text("Second Card")
-                    .frame(width: 150, height: 300)
-                    .background(Color.red)
-            }
-            CarouselCard {
-                Text("Third Card")
-                    .frame(width: 200, height: 250)
-                    .background(Color.yellow)
-            }
-            CarouselCard {
-                Text("Fourth Card")
-                    .frame(width: 200, height: 150)
-                    .background(Color.green)
             }
         }
 
