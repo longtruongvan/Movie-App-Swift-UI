@@ -20,7 +20,7 @@ struct MostPopulars: Codable {
 }
 
 // MARK: - Result
-struct MostPopularResponse: Codable, Identifiable {
+struct MostPopularResponse: Codable, Identifiable, Equatable {
     let adult: Bool
     let backdropPath: String
     let genreIDS: [Int]

@@ -33,12 +33,8 @@ struct MostPopularView: View {
                     CarouselCard {
                         ZStack {
                             AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 328, height: 141)
-                                    .opacity(0.5)
-                                
+                                MovieArtView(currentIndex: $currentIndex, mostPopulars: $mostPopular, item: item, image: image)
+
                             } placeholder: {
                                 ProgressView()
                                     .progressViewStyle(CircularProgressViewStyle(tint: .white))
@@ -46,7 +42,12 @@ struct MostPopularView: View {
                             }
                                 .ignoresSafeArea()
 
-                            Image("img_mark_movie")
+
+                            MovieArtMarkView(
+                                currentIndex: $currentIndex,
+                                mostPopulars: $mostPopular,
+                                item: item
+                            )
 
                             HStack {
                                 Text(item.title)
@@ -113,6 +114,37 @@ struct MostPopularView: View {
         }
             .frame(maxWidth: .infinity, alignment: .leading)
 
+    }
+}
+
+struct MovieArtView: View {
+    @Binding var currentIndex: Int
+    @Binding var mostPopulars: MostPopulars?
+    var item: MostPopularResponse
+    var image: Image
+
+    var body: some View {
+        image
+            .resizable()
+            .scaledToFill()
+            .frame(width: 328, height: 141)
+            .opacity((mostPopulars!.results.firstIndex(of: item) == currentIndex) ? 1 : 1)
+    }
+}
+
+struct MovieArtMarkView: View {
+    @Binding var currentIndex: Int
+    @Binding var mostPopulars: MostPopulars?
+    var item: MostPopularResponse
+
+    var body: some View {
+        HStack {
+            if ((mostPopulars?.results ?? [MostPopularResponse]()).first(where: { $0.id == item.id }) != nil) {
+                Image("img_mark_movie")
+            } else {
+                Image("img_mark_movie")
+            }
+        }
     }
 }
 
