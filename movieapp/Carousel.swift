@@ -74,10 +74,10 @@ struct Carousel<Cards: View>: View {
                         self.config.selected = max(0, self.config.selected - 1)
                     }
                     withAnimation(.easeOut(duration: 0.3)) {
-                        print("ZZZZZ: \(self.config.selected)")
-                        pageSelectedCallback(self.config.selected)
+                        print("Carousel change: \(self.config.selected)")
                         self.offset = self.offset(for: self.config.selected, geometry: geometry)
                     }
+                    pageSelectedCallback(self.config.selected)
                 })
         }
     }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MostPopularView: View {
     @State private var currentIndex: Int = 0
+    @State private var indexOfCarousel: Int = 0
     @State private var mostPopular: MostPopulars?;
     private let repository = MostPopularRepository()
     private let carouselConfig = CarouselConfig()
@@ -26,6 +27,7 @@ struct MostPopularView: View {
 
             Carousel(cardWidth: 328, spacing: -14, carouselConfig: CarouselConfig(), pageSelectedCallback: { result in
                     print(result)
+                    indexOfCarousel = result
                     currentIndex = result % 3
                     print("LONGTV: \(currentIndex)")
                 }) {
@@ -33,7 +35,7 @@ struct MostPopularView: View {
                     CarouselCard {
                         ZStack {
                             AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
-                                MovieArtView(currentIndex: $currentIndex, mostPopulars: $mostPopular, item: item, image: image)
+                                MovieArtView(indexOfCarousel: $indexOfCarousel, mostPopulars: $mostPopular, item: item, image: image)
 
                             } placeholder: {
                                 ProgressView()
@@ -44,7 +46,7 @@ struct MostPopularView: View {
 
 
                             MovieArtMarkView(
-                                currentIndex: $currentIndex,
+                                indexOfCarousel: $indexOfCarousel,
                                 mostPopulars: $mostPopular,
                                 item: item
                             )
@@ -55,6 +57,7 @@ struct MostPopularView: View {
                                     .foregroundColor(.white)
                                     .padding(.bottom, 15)
                                     .padding(.leading, 26)
+                                    .lineLimit(1)
 
                                 Spacer()
 
@@ -77,20 +80,10 @@ struct MostPopularView: View {
                             }
                                 .frame(width: 328, height: 141, alignment: .bottomLeading)
 
-                            Text("")
-                                .frame(width: 328, height: 141)
-                                .background(
-                                LinearGradient(
-                                    gradient:
-                                        Gradient(
-                                        colors: [
-                                            Color(red: 0.392, green: 0.671, blue: 0.859, opacity: 0.5),
-                                            Color(red: 0.51, green: 0.431, blue: 0.784, opacity: 0.1)
-                                        ]
-                                    ),
-                                    startPoint: .leading,
-                                    endPoint: .top
-                                )
+                            BackGoundGradientItemView(
+                                indexOfCarousel: $indexOfCarousel,
+                                mostPopulars: $mostPopular,
+                                item: item
                             )
 
                         }.frame(width: 328, height: 141)
@@ -117,8 +110,42 @@ struct MostPopularView: View {
     }
 }
 
+struct BackGoundGradientItemView: View {
+    @Binding var indexOfCarousel: Int
+    @Binding var mostPopulars: MostPopulars?
+    var item: MostPopularResponse
+
+    var body: some View {
+        Text("")
+            .frame(width: (checkItemIsSelected(mostPopulars: mostPopulars, index: indexOfCarousel, item: item)) ? 0 : 328, height: 141)
+            .background(
+            LinearGradient(
+                gradient:
+                    Gradient(
+                    colors: [
+                        Color(red: 0.392, green: 0.671, blue: 0.859, opacity: 0.5),
+                        Color(red: 0.51, green: 0.431, blue: 0.784, opacity: 0.1)
+                    ]
+                ),
+                startPoint: .leading,
+                endPoint: .top
+            )
+        )
+    }
+
+    func checkItemIsSelected(mostPopulars: MostPopulars?, index: Int, item: MostPopularResponse) -> Bool {
+        if(mostPopulars == nil) {
+            return false
+        }
+        let indexSelected: Int = mostPopulars?.results.index(where: { $0.id == item.id }) ?? -1
+
+        print("INDEX: \(index) - SELECTED: \(indexSelected) - ID: \(item.id)")
+        return indexSelected == index
+    }
+}
+
 struct MovieArtView: View {
-    @Binding var currentIndex: Int
+    @Binding var indexOfCarousel: Int
     @Binding var mostPopulars: MostPopulars?
     var item: MostPopularResponse
     var image: Image
@@ -128,23 +155,47 @@ struct MovieArtView: View {
             .resizable()
             .scaledToFill()
             .frame(width: 328, height: 141)
-            .opacity((mostPopulars!.results.firstIndex(of: item) == currentIndex) ? 1 : 1)
+            .opacity(checkItemIsSelected(mostPopulars: mostPopulars, index: indexOfCarousel, item: item) ? 1 : 0.5)
+    }
+
+    func checkItemIsSelected(mostPopulars: MostPopulars?, index: Int, item: MostPopularResponse) -> Bool {
+        if(mostPopulars == nil) {
+            return false
+        }
+        let indexSelected: Int = mostPopulars?.results.index(where: { $0.id == item.id }) ?? -1
+
+        print("INDEX: \(index) - SELECTED: \(indexSelected) - ID: \(item.id)")
+        return indexSelected == index
     }
 }
 
 struct MovieArtMarkView: View {
-    @Binding var currentIndex: Int
+    @Binding var indexOfCarousel: Int
     @Binding var mostPopulars: MostPopulars?
     var item: MostPopularResponse
 
     var body: some View {
         HStack {
-            if ((mostPopulars?.results ?? [MostPopularResponse]()).first(where: { $0.id == item.id }) != nil) {
+            if (checkItemIsSelected(
+                mostPopulars: mostPopulars,
+                index: indexOfCarousel,
+                item: item)
+                ) {
                 Image("img_mark_movie")
             } else {
-                Image("img_mark_movie")
+//                Image("img_mark_movie")
             }
         }
+    }
+
+    func checkItemIsSelected(mostPopulars: MostPopulars?, index: Int, item: MostPopularResponse) -> Bool {
+        if(mostPopulars == nil) {
+            return false
+        }
+        let indexSelected: Int = mostPopulars?.results.index(where: { $0.id == item.id }) ?? -1
+
+        print("INDEX: \(index) - SELECTED: \(indexSelected) - ID: \(item.id)")
+        return indexSelected == index
     }
 }
 
