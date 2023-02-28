@@ -67,6 +67,8 @@ struct UpcomingReleaseView: View {
 
                         }.frame(width: 145, height: 214.71)
 
+                    }.onTapGesture {
+                        
                     }
                 }
             }
