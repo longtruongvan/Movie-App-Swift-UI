@@ -35,6 +35,8 @@ struct ContentView: View {
 
                 CustomSearchBar()
                 MostPopularView()
+                HomeCategories()
+                UpcomingReleaseView()
             }
                 .frame(maxWidth: .infinity,
                 maxHeight: .infinity,

@@ -41,6 +41,7 @@ class MostPopularRepository: ObservableObject {
                 }
                 return
             } catch {
+                print(String(describing: error)) // <- ✅ Use this for debuging!
                 print("JSON error: \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     failure(error.localizedDescription)
