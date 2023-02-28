@@ -84,7 +84,7 @@ struct Carousel<Cards: View>: View {
 }
 
 struct CarouselCard<Content: View>: View {
-    @EnvironmentObject fileprivate var config: CarouselConfig
+    @EnvironmentObject var config: CarouselConfig
 
     let content: Content
     @State private var cardId: Int? = nil

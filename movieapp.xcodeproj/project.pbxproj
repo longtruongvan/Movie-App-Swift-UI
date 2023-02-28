@@ -22,6 +22,8 @@
 		E6D94D7729ADA97300BD8382 /* MostPopularRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D7629ADA97300BD8382 /* MostPopularRepository.swift */; };
 		E6D94D7B29ADAB6D00BD8382 /* MostPopularResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D7A29ADAB6D00BD8382 /* MostPopularResponse.swift */; };
 		E6D94D7D29ADF5D700BD8382 /* ApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D7C29ADF5D700BD8382 /* ApiConfig.swift */; };
+		E6D94D8129ADFC0700BD8382 /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D8029ADFC0700BD8382 /* ApiUrls.swift */; };
+		E6D94D8329AE089400BD8382 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D8229AE089400BD8382 /* AppConfigs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		E6D94D7629ADA97300BD8382 /* MostPopularRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostPopularRepository.swift; sourceTree = "<group>"; };
 		E6D94D7A29ADAB6D00BD8382 /* MostPopularResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostPopularResponse.swift; sourceTree = "<group>"; };
 		E6D94D7C29ADF5D700BD8382 /* ApiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfig.swift; sourceTree = "<group>"; };
+		E6D94D8029ADFC0700BD8382 /* ApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
+		E6D94D8229AE089400BD8382 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				E6D94D7C29ADF5D700BD8382 /* ApiConfig.swift */,
+				E6D94D8029ADFC0700BD8382 /* ApiUrls.swift */,
+				E6D94D8229AE089400BD8382 /* AppConfigs.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -314,7 +320,9 @@
 				E67A8B1F29A88EAC002C8981 /* ContentView.swift in Sources */,
 				E6316A4E29AA632A00DB3372 /* MostPopularView.swift in Sources */,
 				E6D94D7D29ADF5D700BD8382 /* ApiConfig.swift in Sources */,
+				E6D94D8329AE089400BD8382 /* AppConfigs.swift in Sources */,
 				E6D94D7729ADA97300BD8382 /* MostPopularRepository.swift in Sources */,
+				E6D94D8129ADFC0700BD8382 /* ApiUrls.swift in Sources */,
 				E67A8B1D29A88EAC002C8981 /* movieappApp.swift in Sources */,
 				E6D94D7B29ADAB6D00BD8382 /* MostPopularResponse.swift in Sources */,
 				E6316A5829AA8AB800DB3372 /* Carousel.swift in Sources */,

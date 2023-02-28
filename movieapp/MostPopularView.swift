@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MostPopularView: View {
     @State private var currentIndex: Int = 0
-    @State private var mostPopularResponse: MostPopularResponse?;
-
-    private var carouselConfig = CarouselConfig()
+    @State private var mostPopular: MostPopulars?;
+    private let repository = MostPopularRepository()
+    private let carouselConfig = CarouselConfig()
     var body: some View {
         VStack(spacing: 0) {
             Text("Most Popular")
@@ -22,179 +22,92 @@ struct MostPopularView: View {
                 .padding(.top, 26)
                 .padding(.leading, 50)
 
-            List(mostPopularResponse?.results ?? [Result]()) { _ in
-                Text("LONGTV")
-                    .font(.title)
-                    .foregroundColor(.red)
-                    .padding(.bottom)
-            }.onAppear() {
-                MostPopularRepository().loadData(completion: { data in
-                    self.mostPopularResponse = data
-                })
-            }.navigationTitle("Book List")
-            
+
+
             Carousel(cardWidth: 328, spacing: -14, carouselConfig: CarouselConfig(), pageSelectedCallback: { result in
                     print(result)
-                    currentIndex = result
+                    currentIndex = result % 3
                     print("LONGTV: \(currentIndex)")
                 }) {
-            
-
-                CarouselCard {
-                    ZStack {
-                        Image("fantasticFour")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 328, height: 141)
-                            .opacity(0.5)
-
-                        Image("img_mark_movie")
-
-                        HStack {
-                            Text("Deadpool 2")
-                                .font(.custom("BeVietnamPro-Bold", size: 18))
-                                .foregroundColor(.white)
-                                .padding(.bottom, 15)
-                                .padding(.leading, 26)
-
-                            Spacer()
-
-                            HStack (alignment: .center) {
-                                Text("IMDb")
-                                    .font(.custom("BeVietnamPro-Bold", size: 10))
-                                    .foregroundColor(.black)
-
-
-                                Text("8.5")
-                                    .font(.custom("BeVietnamPro-Bold", size: 10))
-                                    .foregroundColor(.black)
+                ForEach(mostPopular?.results ?? [MostPopularResponse]()) { item in
+                    CarouselCard {
+                        ZStack {
+                            AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 328, height: 141)
+                                    .opacity(0.5)
+                                
+                            } placeholder: {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                    .scaleEffect(1.5)
                             }
-                                .padding(.horizontal, 5.25)
-                                .padding(.vertical, 3)
-                                .background(Color.yellow)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .padding(.bottom, 15)
-                                .padding(.trailing, 26)
-                        }
-                            .frame(width: 328, height: 141, alignment: .bottomLeading)
+                                .ignoresSafeArea()
 
-                        Text("")
-                            .frame(width: 328, height: 141)
-                            .background(
-                            LinearGradient(
-                                gradient:
-                                    Gradient(
-                                    colors: [
-                                        Color(red: 0.392, green: 0.671, blue: 0.859, opacity: 0.5),
-                                        Color(red: 0.51, green: 0.431, blue: 0.784, opacity: 0.1)
-                                    ]
-                                ),
-                                startPoint: .leading,
-                                endPoint: .top
+                            Image("img_mark_movie")
+
+                            HStack {
+                                Text(item.title)
+                                    .font(.custom("BeVietnamPro-Bold", size: 18))
+                                    .foregroundColor(.white)
+                                    .padding(.bottom, 15)
+                                    .padding(.leading, 26)
+
+                                Spacer()
+
+                                HStack (alignment: .center) {
+                                    Text("IMDb")
+                                        .font(.custom("BeVietnamPro-Bold", size: 10))
+                                        .foregroundColor(.black)
+
+
+                                    Text("\(item.voteAverage)".prefix(3))
+                                        .font(.custom("BeVietnamPro-Bold", size: 10))
+                                        .foregroundColor(.black)
+                                }
+                                    .padding(.horizontal, 5.25)
+                                    .padding(.vertical, 3)
+                                    .background(Color.yellow)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                                    .padding(.bottom, 15)
+                                    .padding(.trailing, 26)
+                            }
+                                .frame(width: 328, height: 141, alignment: .bottomLeading)
+
+                            Text("")
+                                .frame(width: 328, height: 141)
+                                .background(
+                                LinearGradient(
+                                    gradient:
+                                        Gradient(
+                                        colors: [
+                                            Color(red: 0.392, green: 0.671, blue: 0.859, opacity: 0.5),
+                                            Color(red: 0.51, green: 0.431, blue: 0.784, opacity: 0.1)
+                                        ]
+                                    ),
+                                    startPoint: .leading,
+                                    endPoint: .top
+                                )
                             )
-                        )
 
-                    }.frame(width: 328, height: 141)
+                        }.frame(width: 328, height: 141)
 
+                    }
                 }
-                CarouselCard {
-                    ZStack {
-                        Image("deadpool")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 328, height: 141)
-
-
-                        Image("img_mark_movie")
-
-                        HStack {
-                            Text("Deadpool 2")
-                                .font(.custom("BeVietnamPro-Bold", size: 18))
-                                .foregroundColor(.white)
-                                .padding(.bottom, 15)
-                                .padding(.leading, 26)
-
-                            Spacer()
-
-                            HStack (alignment: .center) {
-                                Text("IMDb")
-                                    .font(.custom("BeVietnamPro-Bold", size: 10))
-                                    .foregroundColor(.black)
-
-
-                                Text("8.5")
-                                    .font(.custom("BeVietnamPro-Bold", size: 10))
-                                    .foregroundColor(.black)
-                            }
-                                .padding(.horizontal, 5.25)
-                                .padding(.vertical, 3)
-                                .background(Color.yellow)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .padding(.bottom, 15)
-                                .padding(.trailing, 26)
-                        }
-                            .frame(width: 328, height: 141, alignment: .bottomLeading)
-                    }.frame(width: 328, height: 141)
-                }
-                CarouselCard {
-                    ZStack {
-                        Image("fantasticFour")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 328, height: 141)
-                            .opacity(0.5)
-
-                        Image("img_mark_movie")
-
-                        HStack {
-                            Text("Deadpool 2")
-                                .font(.custom("BeVietnamPro-Bold", size: 18))
-                                .foregroundColor(.white)
-                                .padding(.bottom, 15)
-                                .padding(.leading, 26)
-
-                            Spacer()
-
-                            HStack (alignment: .center) {
-                                Text("IMDb")
-                                    .font(.custom("BeVietnamPro-Bold", size: 10))
-                                    .foregroundColor(.black)
-
-
-                                Text("8.5")
-                                    .font(.custom("BeVietnamPro-Bold", size: 10))
-                                    .foregroundColor(.black)
-                            }
-                                .padding(.horizontal, 5.25)
-                                .padding(.vertical, 3)
-                                .background(Color.yellow)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .padding(.bottom, 15)
-                                .padding(.trailing, 26)
-                        }
-                            .frame(width: 328, height: 141, alignment: .bottomLeading)
-
-                        Text("")
-                            .frame(width: 328, height: 141)
-                            .background(
-                            LinearGradient(
-                                gradient:
-                                    Gradient(
-                                    colors: [
-                                        Color(red: 0.392, green: 0.671, blue: 0.859, opacity: 0.5),
-                                        Color(red: 0.51, green: 0.431, blue: 0.784, opacity: 0.1)
-                                    ]
-                                ),
-                                startPoint: .leading,
-                                endPoint: .top
-                            )
-                        )
-
-                    }.frame(width: 328, height: 141)
+            }
+                .frame(height: 141)
+                .padding(.bottom, 17)
+                .onAppear() {
+                repository.getMoviePopulars { response in
+                    self.mostPopular = response
+                } failure: { errorMessage in
 
                 }
 
-            }.frame(height: 141).padding(.bottom, 17)
+
+            }.navigationTitle("Book List")
 
             CustomPageIndicator(numberOfPages: 3, currentIndex: $currentIndex)
         }

@@ -12,14 +12,15 @@ struct MostPopulars: Codable {
     let totalPages, totalResults: Int
 
     enum CodingKeys: String, CodingKey {
-        case page, results
+        case page = "page"
+        case results = "results"
         case totalPages = "total_pages"
         case totalResults = "total_results"
     }
 }
 
 // MARK: - Result
-struct MostPopularResponse: Codable {
+struct MostPopularResponse: Codable, Identifiable {
     let adult: Bool
     let backdropPath: String
     let genreIDS: [Int]
