@@ -23,6 +23,7 @@
 		E6A120FD29AE561C00F48884 /* UpcomingReleaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A120FC29AE561C00F48884 /* UpcomingReleaseView.swift */; };
 		E6A120FF29AE7E4800F48884 /* BottomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A120FE29AE7E4800F48884 /* BottomNavigationBar.swift */; };
 		E6A1210229AE8BC400F48884 /* DetailMovieScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6A1210129AE8BC400F48884 /* DetailMovieScreen.swift */; };
+		E6BA2A0E29AECB4E00AA22B2 /* BeVietnamPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E6BA2A0D29AECB4D00AA22B2 /* BeVietnamPro-Medium.ttf */; };
 		E6D94D7729ADA97300BD8382 /* MostPopularRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D7629ADA97300BD8382 /* MostPopularRepository.swift */; };
 		E6D94D7B29ADAB6D00BD8382 /* MostPopularResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D7A29ADAB6D00BD8382 /* MostPopularResponse.swift */; };
 		E6D94D7D29ADF5D700BD8382 /* ApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D94D7C29ADF5D700BD8382 /* ApiConfig.swift */; };
@@ -69,6 +70,7 @@
 		E6A120FC29AE561C00F48884 /* UpcomingReleaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingReleaseView.swift; sourceTree = "<group>"; };
 		E6A120FE29AE7E4800F48884 /* BottomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationBar.swift; sourceTree = "<group>"; };
 		E6A1210129AE8BC400F48884 /* DetailMovieScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieScreen.swift; sourceTree = "<group>"; };
+		E6BA2A0D29AECB4D00AA22B2 /* BeVietnamPro-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BeVietnamPro-Medium.ttf"; sourceTree = "<group>"; };
 		E6D94D7629ADA97300BD8382 /* MostPopularRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostPopularRepository.swift; sourceTree = "<group>"; };
 		E6D94D7A29ADAB6D00BD8382 /* MostPopularResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostPopularResponse.swift; sourceTree = "<group>"; };
 		E6D94D7C29ADF5D700BD8382 /* ApiConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiConfig.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		E6650CEE29AA1D8300631F2F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E6BA2A0D29AECB4D00AA22B2 /* BeVietnamPro-Medium.ttf */,
 				E6650CF429AA264D00631F2F /* BeVietnamPro-Bold.ttf */,
 				E6650CF129AA200A00631F2F /* BeVietnamPro-Regular.ttf */,
 				E6650CF029AA1FD200631F2F /* BeVietnamPro-Black.ttf */,
@@ -310,6 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E67A8B2429A88EAD002C8981 /* Preview Assets.xcassets in Resources */,
+				E6BA2A0E29AECB4E00AA22B2 /* BeVietnamPro-Medium.ttf in Resources */,
 				E6650CF229AA200A00631F2F /* BeVietnamPro-Regular.ttf in Resources */,
 				E67A8B2129A88EAD002C8981 /* Assets.xcassets in Resources */,
 				E6650CF529AA264D00631F2F /* BeVietnamPro-Bold.ttf in Resources */,

@@ -23,22 +23,132 @@ struct DetailMovieScreen: View {
                 .resizable()
                 .scaledToFit()
                 .frame(maxWidth: screenWidth, maxHeight: screenHeight, alignment: .top)
-            
+
 
             BackButtonView(screenWidth: screenWidth)
             Text("").frame(width: screenWidth, height: screenHeight)
-            VStack {
+            VStack (spacing: 0) {
                 Spacer()
-                VStack {
+                VStack (spacing: 0) {
                     Image("bottomSheetIndicator")
                         .frame(width: 24, height: 3)
                         .padding(.top, 17)
                     Text("Thor")
-                    Text("Thor")
-                    Text("Thor")
-                    Text("Thor")
-                    Text("Thor")
+                        .font(.custom("BeVietnamPro-Bold", size: 64))
+                        .foregroundColor(.white)
+                    Text("The Dark World")
+                        .font(.custom("BeVietnamPro-Bold", size: 18))
+                        .foregroundColor(.white).opacity(0.5)
 
+                    HStack {
+                        Text("Action")
+                            .font(.custom("BeVietnamPro-Bold", size: 12))
+                            .foregroundColor(.white)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 10)
+                            .background(LinearGradient(
+                            gradient:
+                                Gradient(
+                                colors: [
+                                    Color(red: 0.651, green: 0.631, blue: 0.878),
+                                    Color(red: 0.631, green: 0.953, blue: 0.996)
+                                ]
+                            ),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                            ).opacity(0.3))
+                            .cornerRadius(15)
+
+
+                        Text("16+")
+                            .font(.custom("BeVietnamPro-Bold", size: 12))
+                            .foregroundColor(.white)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 10)
+                            .background(LinearGradient(
+                            gradient:
+                                Gradient(
+                                colors: [
+                                    Color(red: 0.651, green: 0.631, blue: 0.878),
+                                    Color(red: 0.631, green: 0.953, blue: 0.996)
+                                ]
+                            ),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                            ).opacity(0.3))
+                            .cornerRadius(15)
+
+                        HStack (alignment: .center) {
+                            Text("IMDb")
+                                .font(.custom("BeVietnamPro-Bold", size: 10))
+                                .foregroundColor(.black)
+
+
+                            Text("9.8".prefix(3))
+                                .font(.custom("BeVietnamPro-Bold", size: 10))
+                                .foregroundColor(.black)
+                        }
+                            .padding(.horizontal, 9)
+                            .padding(.vertical, 5)
+                            .background(Color(red: 0.961, green: 0.773, blue: 0.094))
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
+
+                        Spacer()
+
+                        Image("icShare")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 14, height: 29)
+                            .padding(.leading, 10)
+
+
+                        Image("icFavorites")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 24, height: 24)
+                    }.padding(.horizontal, 50)
+
+
+                    HStack(alignment: .center, spacing: 0) {
+                        Text("When the Dark Elves attempt to plunge the universe into darkness, Thor must embark on a perilous and personal journey that will reunite him with doctor Jane ...")
+                            .font(.custom("BeVietnamPro-Medium", size: 12))
+                            .foregroundColor(.white)
+                            .padding(.top, 17)
+
+                        Spacer()
+//                        Text("More")
+//                            .font(.custom("BeVietnamPro-Medium", size: 12))
+//                            .foregroundColor(.white)
+                    }.padding(.horizontal, 50)
+
+                    HStack(alignment: .center, spacing: 0) {
+                        Text("Cast")
+                            .font(.custom("BeVietnamPro-Bold", size: 18))
+                            .foregroundColor(.white)
+                        Spacer()
+                        Text("See All")
+                            .font(.custom("BeVietnamPro-Medium", size: 12))
+                            .foregroundColor(.white)
+                    }
+                        .padding(.horizontal, 50)
+                        .padding(.top, 20)
+
+                    VStack (spacing: 0){
+                        Image("detailMovie")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth: 50, maxHeight: 50)
+                            .cornerRadius(15)
+                        Text("See All")
+                            .font(.custom("BeVietnamPro-Medium", size: 8))
+                            .foregroundColor(.white)
+                            .padding(.top, 9)
+                        Text("See All")
+                            .font(.custom("BeVietnamPro-Medium", size: 8))
+                            .foregroundColor(.white).opacity(0.5)
+                            .padding(.top, 3)
+                    }
+                   
                     Image("")
                         .resizable()
                         .scaledToFill()

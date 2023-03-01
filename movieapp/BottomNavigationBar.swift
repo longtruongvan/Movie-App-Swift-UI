@@ -17,51 +17,115 @@ enum BottomNavTab: String {
 
 struct BottomNavigationBar: View {
     @State var currentTab: BottomNavTab = .home
+    @State var currentIndex = 0
 
     var body: some View {
-        HStack {
+        HStack(alignment: .top, spacing: 0) {
             Group {
                 Spacer()
 
-                Image("icHome")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 29, height: 29)
-                    .padding(.vertical, 25)
+                ZStack {
+
+                    Image("icHome")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 29, height: 29)
+                        .padding(.vertical, 25)
+                        .foregroundColor(.white)
+                        .onTapGesture {
+                        self.currentIndex = 0
+                    }
+
+                    Image(currentIndex == 0 ? "icDot" : "")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 6, height: 6)
+                        .padding(.top, 33)
+                }
 
                 Spacer()
 
-                Image("icFavorites")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 29, height: 29)
-                    .padding(.vertical, 25)
+                ZStack {
+                    Image("icFavorites")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 29, height: 29)
+                        .padding(.vertical, 25)
+                    
+                        .foregroundColor(.red)
+                        .onTapGesture {
+                        self.currentIndex = 1
+                    }
+
+                    Image(currentIndex == 1 ? "icDot" : "")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 6, height: 6)
+                        .padding(.top, 33)
+                }
 
                 Spacer()
             }
 
             Group {
-                Image("icTicket")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 29, height: 29)
-                    .padding(.vertical, 25)
+                ZStack {
+                    Image("icTicket")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 29, height: 29)
+                        .padding(.vertical, 25)
+                        .foregroundColor(.white)
+                        .onTapGesture {
+                        self.currentIndex = 2
+                    }
+
+                    Image(currentIndex == 2 ? "icDot" : "")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 6, height: 6)
+                        .padding(.top, 33)
+                }
 
                 Spacer()
 
-                Image("icAccount")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 29, height: 29)
-                    .padding(.vertical, 25)
+                ZStack {
+                    Image("icAccount")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 29, height: 29)
+                        .padding(.vertical, 25)
+                        .foregroundColor(.white)
+                        .onTapGesture {
+                        self.currentIndex = 3
+                    }
+
+                    Image(currentIndex == 3 ? "icDot" : "")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 6, height: 6)
+                        .padding(.top, 33)
+                }
 
                 Spacer()
 
-                Image("icShuffle")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 34, height: 34)
-                    .padding(.vertical, 25)
+                ZStack {
+                    Image("icShuffle")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 34, height: 34)
+                        .padding(.vertical, 25)
+                        .foregroundColor(.white)
+                        .onTapGesture {
+                        self.currentIndex = 4
+                    }
+
+                    Image(currentIndex == 4 ? "icDot" : "")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 6, height: 6)
+                        .padding(.top, 33)
+                }
 
                 Spacer()
             }

@@ -82,7 +82,7 @@ struct MostPopularView: View {
                                 }
                                     .padding(.horizontal, 5.25)
                                     .padding(.vertical, 3)
-                                    .background(Color.yellow)
+                                    .background(Color(red: 0.961, green: 0.773, blue: 0.094))
                                     .clipShape(RoundedRectangle(cornerRadius: 15))
                                     .padding(.bottom, 15)
                                     .padding(.trailing, 26)
