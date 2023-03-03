@@ -12,7 +12,7 @@ struct ContentView: View {
     let screenHeight = UIScreen.main.bounds.size.height
     let screenSize = UIScreen.main.bounds.size
     var body: some View {
-        VStack (spacing: 0) {
+        ZStack {
             NavigationView {
                 ZStack {
                     Text("").frame(width: screenWidth, height: screenHeight)
@@ -61,9 +61,10 @@ struct ContentView: View {
                     )
                 )
             }
-            BottomNavigationBar()
-        }
-
+            VStack{
+                BottomNavigationBar()
+            }.frame(width: screenWidth, height: screenHeight, alignment: .bottom)
+        }.edgesIgnoringSafeArea(.all)
     }
 }
 
