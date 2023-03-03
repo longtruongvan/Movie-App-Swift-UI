@@ -13,6 +13,7 @@ struct UpcomingReleaseView: View {
     @State private var mostPopular: MostPopulars?;
     private let repository = MostPopularRepository()
     private let carouselConfig = CarouselConfig()
+    @State private var rootPresenting: Bool = false
 
     var body: some View {
         VStack (alignment: .leading, spacing: 0) {
@@ -34,16 +35,19 @@ struct UpcomingReleaseView: View {
                     print("LONGTV: \(currentIndex)")
                 }) {
                 ForEach(mostPopular?.results ?? [MostPopularResponse]()) { item in
-                    NavigationLink(destination: DetailMovieScreen()){
+                    NavigationLink(
+                        destination: DetailMovieScreen(rootPresenting: $rootPresenting),
+                        isActive: $rootPresenting
+                    ) {
                         CarouselCard(
                             movieType: MovieType.upComingRelease
                         ) {
                             ZStack {
                                 AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.posterPath)) { image in
                                     MovieArtView(
-                                        indexOfCarousel:$indexOfCarousel,
-                                        mostPopulars:$mostPopular,
-                                        item:item,
+                                        indexOfCarousel: $indexOfCarousel,
+                                        mostPopulars: $mostPopular,
+                                        item: item,
                                         image: image,
                                         width: 145,
                                         height: 214.71,
@@ -72,9 +76,9 @@ struct UpcomingReleaseView: View {
                 }
             }
                 .padding(.leading, 100)
-                .frame(height: 214.71,alignment: .leading)
+                .frame(height: 214.71, alignment: .leading)
 //                .padding(.bottom, 17)
-                .onAppear() {
+            .onAppear() {
                 repository.getUpcomingReleases { response in
                     self.mostPopular = response
                 } failure: { errorMessage in
