@@ -54,9 +54,9 @@ struct Carousel<Cards: View>: View {
     }
 
     func offset(for index: Int, geometry: GeometryProxy) -> CGFloat {
-        if(self.movieType == MovieType.upComingRelease){
-            return ( (geometry.size.width - self.config.cardWidth) / 2 - CGFloat(self.config.selected)
-                     * (self.config.cardWidth + spacing)) - self.config.cardWidth
+        if(self.movieType == MovieType.upComingRelease) {
+            return ((geometry.size.width - self.config.cardWidth) / 2 - CGFloat(self.config.selected)
+                    * (self.config.cardWidth + spacing)) - self.config.cardWidth
         }
         return (geometry.size.width - self.config.cardWidth) / 2 - CGFloat(self.config.selected)
             * (self.config.cardWidth + spacing)

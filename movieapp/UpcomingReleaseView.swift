@@ -34,41 +34,40 @@ struct UpcomingReleaseView: View {
                     print("LONGTV: \(currentIndex)")
                 }) {
                 ForEach(mostPopular?.results ?? [MostPopularResponse]()) { item in
+                    NavigationLink(destination: DetailMovieScreen()){
+                        CarouselCard(
+                            movieType: MovieType.upComingRelease
+                        ) {
+                            ZStack {
+                                AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.posterPath)) { image in
+                                    MovieArtView(
+                                        indexOfCarousel:$indexOfCarousel,
+                                        mostPopulars:$mostPopular,
+                                        item:item,
+                                        image: image,
+                                        width: 145,
+                                        height: 214.71,
+                                        movieType: MovieType.upComingRelease
+                                    )
 
-                    CarouselCard(
-                        movieType: MovieType.upComingRelease
-                    ) {
-                        ZStack {
-                            AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.posterPath)) { image in
-                                MovieArtView(
-                                    indexOfCarousel:$indexOfCarousel,
-                                    mostPopulars:$mostPopular,
-                                    item:item,
-                                    image: image,
+                                } placeholder: {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                        .scaleEffect(1.5)
+                                }
+                                    .ignoresSafeArea()
+
+                                BackGoundGradientItemView(
+                                    indexOfCarousel: $indexOfCarousel,
+                                    mostPopulars: $mostPopular,
+                                    item: item,
                                     width: 145,
-                                    height: 214.71,
-                                    movieType: MovieType.upComingRelease
+                                    height: 214.71
                                 )
 
-                            } placeholder: {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                    .scaleEffect(1.5)
-                            }
-                                .ignoresSafeArea()
+                            }.frame(width: 145, height: 214.71)
 
-                            BackGoundGradientItemView(
-                                indexOfCarousel: $indexOfCarousel,
-                                mostPopulars: $mostPopular,
-                                item: item,
-                                width: 145,
-                                height: 214.71
-                            )
-
-                        }.frame(width: 145, height: 214.71)
-
-                    }.onTapGesture {
-                        
+                        }
                     }
                 }
             }
@@ -80,7 +79,7 @@ struct UpcomingReleaseView: View {
                     self.mostPopular = response
                 } failure: { errorMessage in
                 }
-            }.navigationTitle("Book List")
+            }
 
 
             CustomPageIndicator(

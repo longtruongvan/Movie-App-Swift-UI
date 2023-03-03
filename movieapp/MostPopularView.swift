@@ -108,9 +108,7 @@ struct MostPopularView: View {
                 } failure: { errorMessage in
 
                 }
-
-
-            }.navigationTitle("Book List")
+            }
 
             CustomPageIndicator(numberOfPages: 3, currentIndex: $currentIndex)
         }

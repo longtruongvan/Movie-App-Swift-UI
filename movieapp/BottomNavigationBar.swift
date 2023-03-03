@@ -52,8 +52,7 @@ struct BottomNavigationBar: View {
                         .scaledToFill()
                         .frame(width: 29, height: 29)
                         .padding(.vertical, 25)
-                    
-                        .foregroundColor(.red)
+                        .foregroundColor(.white)
                         .onTapGesture {
                         self.currentIndex = 1
                     }

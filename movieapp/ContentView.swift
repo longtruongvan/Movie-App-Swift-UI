@@ -8,57 +8,62 @@
 import SwiftUI
 
 struct ContentView: View {
-
+    let screenWidth = UIScreen.main.bounds.size.width
+    let screenHeight = UIScreen.main.bounds.size.height
+    let screenSize = UIScreen.main.bounds.size
     var body: some View {
-        ZStack {
-            VStack(spacing: 0) {
-                Spacer()
-                HStack(spacing: 0) {
-                    SwiftUI.Group {
-                        Text("Hello,")
-                            .foregroundColor(Color.white)
-                            .font(.custom("BeVietnamPro-Black", fixedSize: 18))
+        VStack (spacing: 0) {
+            NavigationView {
+                ZStack {
+                    Text("").frame(width: screenWidth, height: screenHeight)
+                    VStack(spacing: 0) {
+                        HStack(spacing: 0) {
+                            SwiftUI.Group {
+                                Text("Hello,")
+                                    .foregroundColor(Color.white)
+                                    .font(.custom("BeVietnamPro-Black", fixedSize: 18))
 
-                        Text(" Jane!")
-                            .fontWeight(.black)
-                            .foregroundColor(Color.white)
-                            .font(
-                                .custom("BeVietnamPro-Bold", fixedSize: 18)
-                        )
+                                Text(" Jane!")
+                                    .fontWeight(.black)
+                                    .foregroundColor(Color.white)
+                                    .font(
+                                        .custom("BeVietnamPro-Bold", fixedSize: 18)
+                                )
+                            }
+                            Spacer()
+                            Image("ic_notification")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 63)
+
+                        CustomSearchBar()
+                        MostPopularView()
+                        HomeCategories()
+                        UpcomingReleaseView()
                     }
-                    Spacer()
-                    Image("ic_notification")
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 63)
-
-                CustomSearchBar()
-                MostPopularView()
-                HomeCategories()
-                UpcomingReleaseView()
-                Spacer()
-                BottomNavigationBar()
+                        .frame(maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .top
+                    )
+                }.background(
+                    LinearGradient(
+                        gradient:
+                            Gradient(
+                            colors: [
+                                Color("gradientColorStart"),
+                                Color("gradientColorEnd")
+                            ]
+                        ),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
             }
-                .frame(maxWidth: .infinity,
-                maxHeight: .infinity,
-                alignment: .top
-            )
-        }.background(
-            LinearGradient(
-                gradient:
-                    Gradient(
-                    colors: [
-                        Color("gradientColorStart"),
-                        Color("gradientColorEnd")
-                    ]
-                ),
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-        )
-            .edgesIgnoringSafeArea(.bottom)
+            BottomNavigationBar()
+        }
+
     }
 }
 
