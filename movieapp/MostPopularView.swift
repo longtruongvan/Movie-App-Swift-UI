@@ -13,6 +13,9 @@ struct MostPopularView: View {
     @State private var mostPopular: MostPopulars?;
     private let repository = MostPopularRepository()
     private let carouselConfig = CarouselConfig()
+    @State var itemClick: MostPopularResponse?
+    @State private var rootPresenting: Bool = false
+
     var body: some View {
         VStack(spacing: 0) {
             Text("Most Popular")
@@ -35,68 +38,81 @@ struct MostPopularView: View {
                     print("LONGTV: \(currentIndex)")
                 }) {
                 ForEach(mostPopular?.results ?? [MostPopularResponse]()) { item in
-                    CarouselCard(movieType: MovieType.mostPopular) {
-                        ZStack {
-                            AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
-                                MovieArtView(
-                                    indexOfCarousel:$indexOfCarousel,
+                    NavigationLink(
+                        destination: DetailMovieScreen(
+                            rootPresenting: $rootPresenting,
+                            itemClick: $itemClick
+                        ),
+                        isActive: $rootPresenting
+                    ) {
+                        CarouselCard(movieType: MovieType.mostPopular) {
+                            ZStack {
+                                AsyncImage(url: URL(string: AppConfigs.imageBaseUrl + item.backdropPath)) { image in
+                                    MovieArtView(
+                                        indexOfCarousel: $indexOfCarousel,
+                                        mostPopulars: $mostPopular,
+                                        item: item,
+                                        image: image,
+                                        movieType: MovieType.mostPopular
+                                    )
+
+                                } placeholder: {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                        .scaleEffect(1.5)
+                                }
+                                    .ignoresSafeArea()
+
+
+                                MovieArtMarkView(
+                                    indexOfCarousel: $indexOfCarousel,
                                     mostPopulars: $mostPopular,
-                                    item: item,
-                                    image: image,
-                                    movieType: MovieType.mostPopular
+                                    item: item
                                 )
 
-                            } placeholder: {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                    .scaleEffect(1.5)
-                            }
-                                .ignoresSafeArea()
+                                HStack {
+                                    Text(item.title)
+                                        .font(.custom("BeVietnamPro-Bold", size: 18))
+                                        .foregroundColor(.white)
+                                        .padding(.bottom, 15)
+                                        .padding(.leading, 26)
+                                        .lineLimit(1)
+
+                                    Spacer()
+
+                                    HStack (alignment: .center) {
+                                        Text("IMDb")
+                                            .font(.custom("BeVietnamPro-Bold", size: 10))
+                                            .foregroundColor(.black)
 
 
-                            MovieArtMarkView(
-                                indexOfCarousel: $indexOfCarousel,
-                                mostPopulars: $mostPopular,
-                                item: item
-                            )
-
-                            HStack {
-                                Text(item.title)
-                                    .font(.custom("BeVietnamPro-Bold", size: 18))
-                                    .foregroundColor(.white)
-                                    .padding(.bottom, 15)
-                                    .padding(.leading, 26)
-                                    .lineLimit(1)
-
-                                Spacer()
-
-                                HStack (alignment: .center) {
-                                    Text("IMDb")
-                                        .font(.custom("BeVietnamPro-Bold", size: 10))
-                                        .foregroundColor(.black)
-
-
-                                    Text("\(item.voteAverage)".prefix(3))
-                                        .font(.custom("BeVietnamPro-Bold", size: 10))
-                                        .foregroundColor(.black)
+                                        Text("\(item.voteAverage)".prefix(3))
+                                            .font(.custom("BeVietnamPro-Bold", size: 10))
+                                            .foregroundColor(.black)
+                                    }
+                                        .padding(.horizontal, 5.25)
+                                        .padding(.vertical, 3)
+                                        .background(Color(red: 0.961, green: 0.773, blue: 0.094))
+                                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                                        .padding(.bottom, 15)
+                                        .padding(.trailing, 26)
                                 }
-                                    .padding(.horizontal, 5.25)
-                                    .padding(.vertical, 3)
-                                    .background(Color(red: 0.961, green: 0.773, blue: 0.094))
-                                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                                    .padding(.bottom, 15)
-                                    .padding(.trailing, 26)
-                            }
-                                .frame(width: 328, height: 141, alignment: .bottomLeading)
+                                    .frame(width: 328, height: 141, alignment: .bottomLeading)
 
-                            BackGoundGradientItemView(
-                                indexOfCarousel: $indexOfCarousel,
-                                mostPopulars: $mostPopular,
-                                item: item
-                            )
+                                BackGoundGradientItemView(
+                                    indexOfCarousel: $indexOfCarousel,
+                                    mostPopulars: $mostPopular,
+                                    item: item
+                                )
 
-                        }.frame(width: 328, height: 141)
+                            }.frame(width: 328, height: 141)
 
+                        }
+                            .onTapGesture {
+                            itemClick = item
+                            rootPresenting = true
+                            print(item)
+                        }
                     }
                 }
             }
@@ -127,12 +143,12 @@ struct BackGoundGradientItemView: View {
     var body: some View {
         Text("")
             .frame(
-                width: (
-                    checkItemIsSelected(
-                        mostPopulars: mostPopulars,
-                        index: indexOfCarousel,
-                        item: item
-                    )) ? 0 : width, height: height)
+            width: (
+                checkItemIsSelected(
+                    mostPopulars: mostPopulars,
+                    index: indexOfCarousel,
+                    item: item
+                )) ? 0 : width, height: height)
             .background(
             LinearGradient(
                 gradient:
