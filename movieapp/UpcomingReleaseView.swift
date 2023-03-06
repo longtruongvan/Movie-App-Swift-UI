@@ -14,6 +14,8 @@ struct UpcomingReleaseView: View {
     private let repository = MostPopularRepository()
     private let carouselConfig = CarouselConfig()
     @State private var rootPresenting: Bool = false
+    @State private var count = -1
+    @State var itemClick: MostPopularResponse?
 
     var body: some View {
         VStack (alignment: .leading, spacing: 0) {
@@ -33,10 +35,15 @@ struct UpcomingReleaseView: View {
                     indexOfCarousel = result
                     currentIndex = result % 3
                     print("LONGTV: \(currentIndex)")
+
+
                 }) {
                 ForEach(mostPopular?.results ?? [MostPopularResponse]()) { item in
                     NavigationLink(
-                        destination: DetailMovieScreen(rootPresenting: $rootPresenting),
+                        destination: DetailMovieScreen(
+                            rootPresenting: $rootPresenting,
+                            itemClick: $itemClick
+                        ),
                         isActive: $rootPresenting
                     ) {
                         CarouselCard(
@@ -70,7 +77,10 @@ struct UpcomingReleaseView: View {
                                 )
 
                             }.frame(width: 145, height: 214.71)
-
+                        }.onTapGesture {
+                            itemClick = item
+                            rootPresenting = true
+                            print(item)
                         }
                     }
                 }
@@ -98,6 +108,6 @@ struct UpcomingReleaseView: View {
 
 struct UpcomingReleaseView_Previews: PreviewProvider {
     static var previews: some View {
-        UpcomingReleaseView()
+        Text("")
     }
 }
